@@ -1,6 +1,6 @@
 import vk_api
 import time
-from token2 import token_vk
+from token2 import token_vk, uid
 from win10toast import ToastNotifier
 
 session = vk_api.VkApi(token=token_vk)
@@ -21,15 +21,13 @@ def Online(user_id):
         if user_online["online"] == 1:
             show_notify(user_name, "В сети.")
             while user_online["online"] != 0:
-                time.sleep(3)
-                print(1)
+                time.sleep(5)
                 user_online = session.method("messages.getLastActivity", {"user_id": user_id})
         else:
             show_notify(user_name, "Не в сети.")
             while user_online["online"] == 0:
-                            time.sleep(3)
-                            print(0)
+                            time.sleep(5)
                             user_online = session.method("messages.getLastActivity", {"user_id": user_id})
         
-Online(318305315)
+Online(uid)
 
